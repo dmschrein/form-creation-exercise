@@ -55,6 +55,7 @@ function BandForm({ band }) {
         <div className="w-full md:w-1/2 flex flex-col space-y-2 bg-slate-200 p-4">
           <h2 className="text-2xl font-semibold mt-4">Select Tickets</h2>
           <div className="flex flex-col">
+            {/* Tickets type and description */}
             {band.ticketTypes.map((ticket) => (
               <TicketOrder
                 key={ticket.type}
@@ -66,19 +67,19 @@ function BandForm({ band }) {
             ))}
           </div>
           {/* Total cost Section */}
-          <div className="flex flex-col space-x-2">
-            <div className="flex flex-row space-x-2">
-              <h1 className="font-medium">Total</h1>
+          <div className="flex flex-col space-x-4">
+            <div className="flex flex-row space-x-4">
+              <h2 className="text-2xl">Total</h2>
               <h1 className="text-lg font-semibold">${calculateTotalCost()}</h1>
             </div>
-
-            {/* Payment Details */}
-            <PaymentDetails
-              totalCost={totalCost}
-              ticketCounts={ticketCounts}
-              band={band}
-            />
           </div>
+
+          {/* Payment Details */}
+          <PaymentDetails
+            totalCost={totalCost}
+            ticketCounts={ticketCounts}
+            band={band}
+          />
         </div>
       </div>
     </div>

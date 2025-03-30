@@ -55,7 +55,7 @@ function PaymentDetails({ totalCost, ticketCounts, band }) {
         onSubmit={handlePaymentSubmit}
         className="flex flex-col space-y-4"
       >
-        <div className="flex w-2/3 flex-col space-y-6">
+        <div className="flex flex-col space-y-6">
           {/* Personal Information */}
           <div className="flex flex-row space-x-2">
             {" "}
