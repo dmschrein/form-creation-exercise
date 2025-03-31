@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import BandDescription from "./components/BandDescription";
 
 function BandForm({ band }) {
-  // set inital ticket count
+  // set initial ticket count
   const [ticketCounts, setTicketCounts] = useState(() => {
     const initialCounts = {};
     band.ticketTypes.forEach((ticket) => {
@@ -35,7 +35,7 @@ function BandForm({ band }) {
       const count = ticketCounts[ticket.type] || 0;
       return total + ticket.cost * count;
     }, 0);
-    const totalCost = (totalCents / 100).toFixed(2); // Convert cents to to dollars and format
+    const totalCost = (totalCents / 100).toFixed(2); // Convert cents to dollars and format
     return totalCost;
   };
 
@@ -45,17 +45,20 @@ function BandForm({ band }) {
   return (
     <div className="max-w-4xl mx-auto p-4">
       <Header band={band} />
-      <div className="flex flex-row space-x-4">
-        {/* Left side of form */}
-        <div className="flex flex-col">
-          <img src={band.imgURL} alt="BandImage" className="w-full border" />
+      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+        {/* Left side: Band image and description */}
+        <div className="w-full md:w-1/2">
+          <img
+            src={band.imgURL}
+            alt={`Bandimage of ${band.name}`}
+            className="w-full border mb-2"
+          />
           <BandDescription description={band.description_blurb} />
         </div>
-        {/* Right Side: Ticket info */}
-        <div className="w-full flex flex-col space-y-2 bg-slate-100 p-4">
+        {/* Right side: Ticket info */}
+        <div className="w-full md:w-1/2 flex flex-col space-y-2 bg-slate-100 p-4">
           <h2 className="text-2xl font-semibold mt-4">Select Tickets</h2>
           <div className="flex flex-col">
-            {/* Tickets type and description */}
             {band.ticketTypes.map((ticket) => (
               <TicketOrder
                 key={ticket.type}
@@ -70,13 +73,12 @@ function BandForm({ band }) {
           <div className="p-4">
             <div className="flex flex-col">
               <div className="flex flex-row justify-between items-center mb-8">
-                <h2 className="text-2xl">Total</h2>
+                <h2 className="text-2xl uppercase">Total</h2>
                 <h1 className="text-lg font-semibold">
                   ${calculateTotalCost()}
                 </h1>
               </div>
             </div>
-
             {/* Payment Details */}
             <PaymentDetails
               totalCost={totalCost}

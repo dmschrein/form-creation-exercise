@@ -12,19 +12,31 @@ function TicketOrder({ ticket, count, onIncrement, onDecrement }) {
         {/* Ticket details */}
         <div className="flex flex-col">
           <div className="flex flex-row">
-            <span className="font-semibold">{ticket.name}</span>
+            <span className="font-semibold text-lg uppercase">
+              {ticket.name}
+            </span>
           </div>
           <div className="flex flex-col mt-2">
             <p className="mb-5">{ticket.description}</p>
-            <p>${formatTicketCost()}</p>
+            <p className="text-lg">${formatTicketCost()}</p>
           </div>
         </div>
 
         {/* Cohesive control container */}
         <div className="h-10 ml-8">
-          <div className="border border-black inline-flex mb-24">
+          <div
+            className="border border-black inline-flex mb-24"
+            role="group"
+            aria-label={`${ticket.name} ticket quantity`}
+          >
             {/* Ticket count */}
-            <div className="w-12 px-1 py-0 flex items-center justify-center">
+            <div
+              className="w-12 px-1 py-0 flex items-center justify-center"
+              role="spinbutton"
+              aria-valuenow={count}
+              aria-valuemin={0}
+              aria-label={`${ticket.name} ticket count`}
+            >
               <span>{count}</span>
             </div>
             {/* Up & Down arrows in a column */}
@@ -32,6 +44,7 @@ function TicketOrder({ ticket, count, onIncrement, onDecrement }) {
               <button
                 type="button"
                 onClick={() => onIncrement(ticket.type)}
+                aria-label={`Increase ${ticket.name} count`}
                 className="text-sm px-1 py-0 bg-gray-300 hover:bg-gray-400 border-b border-black"
               >
                 &#x25B2;
@@ -39,6 +52,7 @@ function TicketOrder({ ticket, count, onIncrement, onDecrement }) {
               <button
                 type="button"
                 onClick={() => onDecrement(ticket.type)}
+                aria-label={`Decrease ${ticket.name} count`}
                 className="text-sm px-1 py-0 bg-gray-300 hover:bg-gray-400"
               >
                 &#x25BC;

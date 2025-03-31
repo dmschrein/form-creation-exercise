@@ -15,12 +15,12 @@ function Header({ band }) {
     <div className="mb-10 mt-10">
       <h1 className="text-3xl font-bold mb-2">{band.name}</h1>
       <div className="flex flex-row items-center space-x-2">
-        <FaCalendarAlt />
+        <FaCalendarAlt aria-hidden="true" focusable="false" />
         <span className="mb-1">{formatDate()}</span>
       </div>
 
       <div className="flex flex-row items-center space-x-2">
-        <FaMapMarkerAlt />
+        <FaMapMarkerAlt aria-hidden="true" focusable="false" />
         <span>{band.location}</span>
       </div>
     </div>
