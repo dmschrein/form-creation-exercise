@@ -1,3 +1,5 @@
+import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+
 function Header({ band }) {
   const formatDate = () => {
     const date = band.date;
@@ -10,10 +12,17 @@ function Header({ band }) {
     return formattedDate;
   };
   return (
-    <div className="mb-10">
+    <div className="mb-10 mt-10">
       <h1 className="text-3xl font-bold mb-2">{band.name}</h1>
-      <p>{formatDate()}</p>
-      <p>{band.location}</p>
+      <div className="flex flex-row items-center space-x-2">
+        <FaCalendarAlt />
+        <span className="mb-1">{formatDate()}</span>
+      </div>
+
+      <div className="flex flex-row items-center space-x-2">
+        <FaMapMarkerAlt />
+        <span>{band.location}</span>
+      </div>
     </div>
   );
 }

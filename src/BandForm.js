@@ -52,7 +52,7 @@ function BandForm({ band }) {
           <BandDescription description={band.description_blurb} />
         </div>
         {/* Right Side: Ticket info */}
-        <div className="w-full md:w-1/2 flex flex-col space-y-2 bg-slate-200 p-4">
+        <div className="w-full flex flex-col space-y-2 bg-slate-100 p-4">
           <h2 className="text-2xl font-semibold mt-4">Select Tickets</h2>
           <div className="flex flex-col">
             {/* Tickets type and description */}
@@ -67,19 +67,23 @@ function BandForm({ band }) {
             ))}
           </div>
           {/* Total cost Section */}
-          <div className="flex flex-col space-x-4">
-            <div className="flex flex-row space-x-4">
-              <h2 className="text-2xl">Total</h2>
-              <h1 className="text-lg font-semibold">${calculateTotalCost()}</h1>
+          <div className="p-4">
+            <div className="flex flex-col">
+              <div className="flex flex-row justify-between items-center mb-8">
+                <h2 className="text-2xl">Total</h2>
+                <h1 className="text-lg font-semibold">
+                  ${calculateTotalCost()}
+                </h1>
+              </div>
             </div>
-          </div>
 
-          {/* Payment Details */}
-          <PaymentDetails
-            totalCost={totalCost}
-            ticketCounts={ticketCounts}
-            band={band}
-          />
+            {/* Payment Details */}
+            <PaymentDetails
+              totalCost={totalCost}
+              ticketCounts={ticketCounts}
+              band={band}
+            />
+          </div>
         </div>
       </div>
     </div>
