@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: "Roboto", serif;
+}
+
 /* Custom styles */
 .custom-button {
   background-color: #1e40af;

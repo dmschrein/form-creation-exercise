@@ -5,42 +5,35 @@ function PaymentDetails({ totalCost, ticketCounts, band }) {
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
   const [creditCardNumber, setCreditCardNumber] = useState("");
-  const [expyDate, setExpyDate] = useState("");
+  const [expyDate, setExpiryDate] = useState("");
   const [cvvNumber, setCvvNumber] = useState("");
-  const [error, setError] = useState(null);
 
   const handlePaymentSubmit = (e) => {
     e.preventDefault();
-    if (
-      firstName &&
-      lastName &&
-      address &&
-      creditCardNumber &&
-      expyDate &&
-      cvvNumber
-    ) {
-      const orderDetails = {
-        customer: { firstName, lastName, address },
-        payment: { creditCardNumber, expyDate, cvvNumber },
-        orderSummary: { totalCost, ticketCounts, bandName: band.name },
-      };
-      alert(
-        "Success! Order Details:\n" + JSON.stringify(orderDetails, null, 2)
-      );
-    } else {
-      setError("Please fill in all the fields.");
+
+    const totalTickets = Object.values(ticketCounts).reduce(
+      (total, count) => total + count,
+      0
+    );
+    if (totalTickets === 0) {
+      alert("Please select at least one ticket.");
+      return;
     }
+
+    const orderDetails = {
+      customer: { firstName, lastName, address },
+      payment: { creditCardNumber, setExpiryDate, cvvNumber },
+      orderSummary: { totalCost, ticketCounts, bandName: band.name },
+    };
+    alert("Success! Order Details:\n" + JSON.stringify(orderDetails, null, 2));
   };
 
   return (
     <div className="w-full">
-      {error && (
-        <div role="alert" aria-live="assertive" className="text-red-500 mb-2">
-          {error}
-        </div>
-      )}
       <form
         id="payment-form"
+        data-testid="payment-form"
+        aria-label="Payment"
         onSubmit={handlePaymentSubmit}
         className="flex flex-col space-y-4"
       >
@@ -112,14 +105,14 @@ function PaymentDetails({ totalCost, ticketCounts, band }) {
           </div>
           <div className="flex flex-row space-x-2 mt-4">
             <div className="w-full">
-              <label htmlFor="expyDate" className="block mb-1">
+              <label htmlFor="expiryDate" className="block mb-1">
                 Expiry Date
               </label>
               <input
-                id="expyDate"
+                id="expiryDate"
                 type="text"
                 value={expyDate}
-                onChange={(e) => setExpyDate(e.target.value)}
+                onChange={(e) => setExpiryDate(e.target.value)}
                 placeholder="MM/YY"
                 required
                 className="w-full border p-2"
@@ -142,7 +135,10 @@ function PaymentDetails({ totalCost, ticketCounts, band }) {
           </div>
         </fieldset>
 
-        <button type="submit" className="mt-4 bg-blue-500 p-2 text-white">
+        <button
+          type="submit"
+          className="text-lg hover:bg-orange-500 mt-4 bg-blue-500 p-2 text-white rounded"
+        >
           Get Tickets
         </button>
       </form>
